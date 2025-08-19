@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shanol - Checkout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async defer src="https://accounts.google.com/gsi/client"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+  <style>
+    .step { display: none; }
+    .step-active { display: block; }
+    .glass-header {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- ✅ HEADER -->
+<!-- ✅ HEADER -->
+<header class="glass-header fixed w-full top-0 left-0 z-50 shadow">
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-3">
+    <a href="index.html" class="text-2xl font-bold text-indigo-600">Shanol</a>
+    <nav class="space-x-6 hidden md:flex items-center">
+      <a href="index.html" class="text-gray-700 hover:text-indigo-600">Home</a>
+      <a href="product.html" class="text-gray-700 hover:text-indigo-600">Products</a>
+      <a href="checkout.html" class="text-gray-700 hover:text-indigo-600">Checkout</a>
+      <!-- Cart Icon -->
+      <a href="checkout.html" class="relative">
+        🛒
+        <span id="cart-count" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+<div class="pt-20"></div> <!-- space for fixed header -->
+
+
+<div class="pt-24 pb-12 max-w-4xl mx-auto px-4">
+  <h2 class="text-3xl font-bold mb-8 text-center text-indigo-600">Checkout</h2>
+
+  <!-- Progress Bar -->
+  <div class="flex justify-between mb-10">
+    <div id="step1-indicator" class="flex-1 text-center font-semibold py-2 rounded-full bg-indigo-600 text-white">1. Address</div>
+    <div id="step2-indicator" class="flex-1 text-center font-semibold py-2 rounded-full bg-gray-200 text-gray-500 mx-2">2. Review</div>
+    <div id="step3-indicator" class="flex-1 text-center font-semibold py-2 rounded-full bg-gray-200 text-gray-500">3. Confirm</div>
+  </div>
+
+  <!-- Google Login -->
+  <div id="login-section" class="mb-6 text-center">
+    <div id="google-login-btn" class="flex justify-center"></div>
+    <div id="user-info" class="hidden flex items-center gap-3 justify-center mt-4">
+      <img id="user-pic" class="w-10 h-10 rounded-full shadow" />
+      <span id="user-name" class="font-medium text-gray-700"></span>
+    </div>
+    <button id="logout-btn" class="hidden mt-3 px-4 py-2 bg-red-500 text-white rounded-lg">Logout</button>
+  </div>
+
+  <!-- Steps -->
+  <div class="bg-white p-8 rounded-2xl shadow-lg">
+
+    <!-- Step 1: Address -->
+    <div id="step1" class="step step-active">
+      <h3 class="text-xl font-bold mb-4">Shipping Address</h3>
+      <form id="billing-form" class="space-y-4">
+        <input type="text" id="name" placeholder="Full Name" class="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-indigo-400">
+        <input type="email" id="email" placeholder="Email" class="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-indigo-400">
+        <input type="tel" id="phone" placeholder="Phone Number" class="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-indigo-400">
+        <textarea id="address" placeholder="Full Address" class="w-full border px-4 py-3 rounded-lg focus:ring-2 focus:ring-indigo-400"></textarea>
+        <button type="button" id="toStep2" class="w-full py-3 rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 font-semibold transition">Next</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Review -->
+    <div id="step2" class="step">
+      <h3 class="text-xl font-bold mb-4">Review Your Cart</h3>
+      <div id="cart-summary" class="space-y-4 mb-6"></div>
+      <div class="flex justify-between">
+        <button type="button" id="backToStep1" class="px-6 py-3 rounded-xl bg-gray-300 text-gray-700 hover:bg-gray-400">Back</button>
+        <button type="button" id="toStep3" class="px-6 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 font-semibold">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Confirm -->
+    <div id="step3" class="step">
+      <h3 class="text-xl font-bold mb-4">Confirm & Place Order</h3>
+      <p class="mb-6 text-gray-600">Click below to send your order to us on WhatsApp</p>
+      <button id="whatsapp-btn" class="w-full py-4 rounded-xl text-white bg-green-500 hover:bg-green-600 font-semibold text-lg">📲 Order on WhatsApp</button>
+      <button type="button" id="backToStep2" class="mt-4 w-full py-3 rounded-xl bg-gray-300 text-gray-700 hover:bg-gray-400">Back</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ✅ FOOTER -->
+<footer class="bg-gray-900 text-gray-300 py-6 mt-12">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+    <p>© 2025 Shanol. All rights reserved.</p>
+    <div class="space-x-6 mt-3 md:mt-0">
+      <a href="#" class="hover:text-white">About</a>
+      <a href="#" class="hover:text-white">Contact</a>
+      <a href="#" class="hover:text-white">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Scripts -->
+<script>
+let loggedInUser = null;
+function initGoogleLogin(){
+  if (window.google && window.google.accounts && window.google.accounts.id) {
+    google.accounts.id.initialize({
+      client_id: "578872900129-bb8h526dr8pjtjil9p8qvptv5b9fu3vb.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("google-login-btn"),
+      { theme: "outline", size: "large", width: 250 }
+    );
+  } else { setTimeout(initGoogleLogin, 200); }
+}
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential);
+  loggedInUser = data; localStorage.setItem("user", JSON.stringify(data));
+  updateUI(data);
+}
+function updateUI(data) {
+  document.getElementById("google-login-btn").classList.add("hidden");
+  document.getElementById("user-info").classList.remove("hidden");
+  document.getElementById("logout-btn").classList.remove("hidden");
+  document.getElementById("user-pic").src = data.picture;
+  document.getElementById("user-name").textContent = `${data.name} (${data.email})`;
+  document.getElementById("email").value = data.email;
+}
+document.addEventListener("DOMContentLoaded", () => {
+  initGoogleLogin();
+  const savedUser = localStorage.getItem("user");
+  if (savedUser) { loggedInUser = JSON.parse(savedUser); updateUI(loggedInUser); }
+  document.getElementById("logout-btn").addEventListener("click", () => {
+    localStorage.removeItem("user"); loggedInUser = null;
+    document.getElementById("google-login-btn").classList.remove("hidden");
+    document.getElementById("user-info").classList.add("hidden");
+    document.getElementById("logout-btn").classList.add("hidden");
+  });
+});
+
+// Checkout Steps
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
+const step1Ind = document.getElementById("step1-indicator");
+const step2Ind = document.getElementById("step2-indicator");
+const step3Ind = document.getElementById("step3-indicator");
+
+function showStep(n){
+  [step1, step2, step3].forEach(s => s.classList.remove("step-active"));
+  [step1Ind, step2Ind, step3Ind].forEach(ind => {
+    ind.classList.add("bg-gray-200","text-gray-500");
+    ind.classList.remove("bg-indigo-600","text-white");
+  });
+  if(n===1){ step1.classList.add("step-active"); step1Ind.classList.add("bg-indigo-600","text-white"); }
+  if(n===2){ step2.classList.add("step-active"); step2Ind.classList.add("bg-indigo-600","text-white"); renderCartSummary(); }
+  if(n===3){ step3.classList.add("step-active"); step3Ind.classList.add("bg-indigo-600","text-white"); }
+}
+document.getElementById("toStep2").onclick = () => {
+  if (!loggedInUser) { alert("Please login with Gmail first."); return; }
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  if(!name || !email || !phone || !address){ alert("Please fill all fields"); return; }
+  if(cart.length===0){ alert("Cart is empty!"); return; }
+  showStep(2);
+};
+document.getElementById("backToStep1").onclick = ()=>showStep(1);
+document.getElementById("toStep3").onclick = ()=>showStep(3);
+document.getElementById("backToStep2").onclick = ()=>showStep(2);
+
+// Cart summary
+const cartSummary = document.getElementById("cart-summary");
+function renderCartSummary(){
+  if(cart.length===0){ cartSummary.innerHTML="<p class='text-gray-600'>Cart is empty</p>"; return; }
+  let total = 0;
+  let html = `<div class='divide-y'>`;
+  cart.forEach((item,i)=>{
+    total += item.price*item.quantity;
+    html += `
+      <div class='flex items-center gap-4 py-3'>
+        <img src="${(item.images && item.images[0]) ? item.images[0] : 'https://via.placeholder.com/60'}" class='w-16 h-16 object-cover rounded'/>
+        <div class='flex-1'>
+          <p class='font-medium'>${item.title} × ${item.quantity}</p>
+          <p class='text-sm text-gray-500'>SKU: ${item.sku}</p>
+        </div>
+        <p class='font-bold text-green-600'>₹${item.price*item.quantity}</p>
+      </div>`;
+  });
+  html += `</div><div class='mt-4 flex justify-between font-bold text-lg'>Total <span>₹${total}</span></div>`;
+  cartSummary.innerHTML = html;
+}
+
+// WhatsApp
+document.getElementById("whatsapp-btn").onclick = ()=>{
+  if(cart.length===0){ alert("Cart empty!"); return; }
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  let message = `Hello, I want to place an order:\\n\\nName: ${name}\\nPhone: ${phone}\\nEmail: ${email}\\nAddress: ${address}\\n\\nOrder Details:\\n`;
+  let total = 0;
+  cart.forEach((item,i)=>{ total+=item.price*item.quantity; message += `${i+1}. ${item.title} (x${item.quantity}) - ₹${item.price*item.quantity}\\n`; });
+  message += `\\nTotal: ₹${total}`;
+  const whatsappNumber = "919354105714";
+  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+  localStorage.removeItem("cart");
+  alert("Order sent via WhatsApp!"); window.location.href="index.html";
+};
+</script>
+
+<script>
+// ✅ Cart Count Update Function
+function updateCartCount() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  document.getElementById("cart-count").textContent = cart.length;
+}
+
+// Page load par update ho
+document.addEventListener("DOMContentLoaded", updateCartCount);
+</script>
+
+</body>
+</html>

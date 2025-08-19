@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Product Details - Shanol</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Default Meta (fallback) -->
+  <meta name="description" content="Shanol पर प्रोडक्ट देखें और खरीदें।">
+  <link rel="canonical" href="https://shanol.shop/product.html">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Shanol - Product Details">
+  <meta property="og:description" content="बेहतरीन दाम पर क्वालिटी प्रोडक्ट।">
+  <meta property="og:image" content="https://via.placeholder.com/400x400?text=Shanol">
+  <meta property="og:url" content="https://shanol.shop/product.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Tailwind -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    #main-product-img { width:100%; height:100%; object-fit:contain; object-position:center; transition:transform .25s ease; }
+    #main-product-img:hover { transform:scale(1.04); }
+    #thumbnail-container img { width:5rem; height:5rem; object-fit:contain; object-position:center; }
+    #related-products img { max-height:100%; max-width:100%; object-fit:contain; object-position:center; }
+    .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none;}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-filter backdrop-blur shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <!-- Brand -->
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="text-2xl font-extrabold tracking-tight text-indigo-600">Shanol</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html#home" class="hover:text-indigo-600">Home</a>
+        <a href="index.html#products" class="hover:text-indigo-600">Products</a>
+        <a href="index.html#offers" class="hover:text-indigo-600">Offers</a>
+        <a href="index.html#contact" class="hover:text-indigo-600">Contact</a>
+        <a href="index.html#cart" class="relative hover:text-indigo-600">
+          Cart
+          <span id="cart-count"
+                class="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 rounded-full grid place-items-center">0</span>
+        </a>
+      </nav>
+
+      <!-- Search placeholder (optional) -->
+      <div class="hidden md:block">
+        <input id="search" type="text" placeholder="Search products..."
+               class="w-64 rounded-full border px-4 py-1 text-sm focus:ring-2 focus:ring-indigo-200 outline-none">
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden p-2 rounded hover:bg-gray-100" aria-label="menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="md:hidden hidden border-t bg-white">
+      <div class="max-w-6xl mx-auto px-4 py-2 text-sm">
+        <a href="index.html#home" class="block py-2">Home</a>
+        <a href="index.html#products" class="block py-2">Products</a>
+        <a href="index.html#offers" class="block py-2">Offers</a>
+        <a href="index.html#contact" class="block py-2">Contact</a>
+        <a href="index.html#cart" class="block py-2 relative">
+          Cart
+          <span id="cart-count-mobile"
+                class="absolute top-2 left-14 bg-red-500 text-white text-xs w-5 h-5 rounded-full grid place-items-center">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow p-5">
+      <!-- Gallery -->
+   <section>
+  <div class="w-full h-96 bg-gray-50 rounded-xl overflow-hidden border flex items-center justify-center">
+    <img id="main-product-img" src="" alt="Product Image" class="h-full w-auto object-contain"/>
+  </div>
+  <div id="thumbnail-container" class="mt-4 flex gap-3 overflow-x-auto no-scrollbar">
+    <!-- thumbnails injected -->
+  </div>
+</section>
+
+      <!-- Info -->
+      <section class="flex flex-col">
+        <div class="flex-1">
+          <h1 id="product-title" class="text-3xl font-bold mb-2"></h1>
+          <p id="product-price" class="text-2xl font-semibold text-green-600 mb-1"></p>
+          <p id="product-sku" class="text-sm text-gray-500 mb-4"></p>
+
+          <p id="product-desc" class="leading-relaxed text-gray-700 mb-5"></p>
+
+          <ul id="product-features" class="list-disc list-inside space-y-1 text-gray-700 mb-6"></ul>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button id="add-to-cart-btn"
+                  class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-medium shadow">
+            🛒 Add to Cart
+          </button>
+          <button id="buy-now-btn"
+  class="border border-indigo-600 text-indigo-700 hover:bg-indigo-50 py-3 rounded-xl font-medium">
+  ⚡ Buy Now
+</button>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- Related -->
+    <section class="mt-10">
+  <h2 class="text-2xl font-bold mb-4">You may also like</h2>
+  <div id="related-products" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    <!-- related cards injected -->
+  </div>
+</section>
+
+
+    <!-- Bottom Cart (Live) -->
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+      <div id="cart" class="bg-white rounded-2xl shadow p-4">
+        <!-- renderCart() from main.js injects here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Page JS -->
+
+<script>
+  // Mobile drawer
+  document.addEventListener("click", (e) => {
+    const menu = document.getElementById("mobile-menu");
+    if (e.target.closest("#menu-btn")) {
+      menu.classList.toggle("hidden");
+    } else if (!e.target.closest("#mobile-menu")) {
+      menu.classList.add("hidden");
+    }
+  });
+
+  // Helper: safe get
+  const safeGet = (key, fallback = []) => {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch { return fallback; }
+  };
+
+  // ✅ Render Product Function (sab kuch yahin hai)
+  function renderProduct(productData) {
+    if (!productData) return;
+
+    document.getElementById("product-title").textContent = productData.title || "";
+    document.getElementById("product-price").textContent = "₹" + (productData.price ?? "");
+    document.getElementById("product-sku").textContent =
+      "SKU: " + (productData.SKU || productData.sku || ("SKU-" + productData.id));
+    document.getElementById("product-desc").textContent = productData.description || "";
+
+    // features
+    const feats = Array.isArray(productData.features) ? productData.features : [];
+    const featUL = document.getElementById("product-features");
+    featUL.innerHTML = "";
+    feats.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = f;
+      featUL.appendChild(li);
+    });
+
+    // images
+    const placeholder = "https://via.placeholder.com/400x400?text=No+Image";
+    const images = Array.isArray(productData.images) && productData.images.length
+      ? productData.images
+      : [productData.image || placeholder];
+
+    const mainImg = document.getElementById("main-product-img");
+    const thumbs = document.getElementById("thumbnail-container");
+
+    mainImg.src = images[0] || placeholder;
+    thumbs.innerHTML = "";
+
+    images.forEach(src => {
+      const t = document.createElement("img");
+      t.src = src || placeholder;
+      t.alt = "thumb";
+      t.className = "border rounded-lg cursor-pointer bg-white shadow hover:ring-2 hover:ring-indigo-500 transition";
+      t.addEventListener("click", () => { mainImg.src = src || placeholder; });
+      thumbs.appendChild(t);
+    });
+
+    // ✅ Dynamic SEO
+    const url = "https://shanol.shop/product.html?id=" + productData.id;
+    document.title = productData.title + " – Shanol";
+
+    document.querySelector('meta[name="description"]').setAttribute(
+      "content",
+      productData.description || "Shanol product details"
+    );
+    document.querySelector('link[rel="canonical"]').setAttribute("href", url);
+    document.querySelector('meta[property="og:title"]').setAttribute(
+      "content",
+      productData.title + " – Shanol"
+    );
+    document.querySelector('meta[property="og:description"]').setAttribute(
+      "content",
+      productData.description || ""
+    );
+    document.querySelector('meta[property="og:url"]').setAttribute("content", url);
+    document.querySelector('meta[property="og:image"]').setAttribute("content", images[0]);
+
+    // ✅ Schema JSON-LD
+    const schema = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": productData.title,
+      "description": productData.description || "",
+      "sku": productData.sku || ("SKU-" + productData.id),
+      "image": images,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "INR",
+        "price": productData.price || 0,
+        "availability": "https://schema.org/InStock",
+        "url": url
+      }
+    };
+    const oldSchema = document.getElementById("product-schema");
+    if (oldSchema) oldSchema.remove();
+    const s = document.createElement("script");
+    s.id = "product-schema";
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  }
+
+  // ✅ View Product (without reload)
+  function viewProduct(productId) {
+    const all = safeGet("allProducts");
+    const fromGlobal = (window.products || []).find(p => String(p.id) === String(productId));
+    const selected = all.find(p => String(p.id) === String(productId)) || fromGlobal;
+
+    if (selected) {
+      localStorage.setItem("selectedProduct", JSON.stringify(selected));
+
+      // URL change without reload
+      const newUrl = "product.html?id=" + productId;
+      window.history.pushState({}, "", newUrl);
+
+      // Render product again
+      renderProduct(selected);
+    } else {
+      alert("Product data not found.");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof updateCartCount === "function") updateCartCount();
+    if (typeof renderCart === "function") renderCart();
+
+    if (!localStorage.getItem("allProducts") && Array.isArray(window.products)) {
+      localStorage.setItem("allProducts", JSON.stringify(window.products));
+    }
+
+    // Get productId from URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    const all = safeGet("allProducts", window.products || []);
+    const productData = all.find(p => String(p.id) === String(productId))
+      || safeGet("selectedProduct", null);
+
+    if (!productData) {
+      document.getElementById("product-title").textContent = "Product not found";
+      return;
+    }
+
+    // Render current product
+    renderProduct(productData);
+
+    // ✅ Related products
+    const relatedWrap = document.getElementById("related-products");
+    const related = all.filter(p => String(p.id) !== String(productData.id)).slice(0, 10);
+
+    relatedWrap.innerHTML = "";
+    related.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "w-48 sm:w-56 flex-shrink-0 bg-white rounded-xl shadow hover:shadow-md transition p-3 flex flex-col";
+
+      card.innerHTML = `
+        <div class="w-full h-40 bg-gray-50 rounded overflow-hidden grid place-items-center">
+          <img src="${(p.images && p.images[0]) || p.image || "https://via.placeholder.com/400x400?text=No+Image"}" 
+               alt="${p.title}" 
+               class="max-h-full max-w-full object-contain"/>
+        </div>
+        <h3 class="mt-3 font-semibold text-gray-900 text-sm line-clamp-2">${p.title || ""}</h3>
+        <p class="text-indigo-600 font-bold mt-1">₹${Number(p.price)||0}</p>
+        <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
+          <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded w-full">Add</button>
+          <button class="border border-gray-300 hover:bg-gray-50 py-2 rounded w-full">View</button>
+        </div>
+      `;
+
+      const [addBtnR, viewBtnR] = card.querySelectorAll("button");
+      addBtnR.addEventListener("click", () => {
+        if (typeof addToCart === "function") addToCart(p.id);
+        if (typeof updateCartCount === "function") updateCartCount();
+        if (typeof renderCart === "function") renderCart();
+      });
+      viewBtnR.addEventListener("click", () => viewProduct(p.id));
+
+      relatedWrap.appendChild(card);
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const addBtn = document.getElementById("add-to-cart-btn");
+
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      const productData = JSON.parse(localStorage.getItem("selectedProduct"));
+
+      if (productData && typeof addToCart === "function") {
+        addToCart(productData.id);   // cart me add karega
+        updateCartCount();           // cart count update
+        renderCart();                // cart section refresh
+      } else {
+        alert("Product not found!");
+      }
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buyNowBtn = document.getElementById("buy-now-btn");
+
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener("click", () => {
+      const productData = JSON.parse(localStorage.getItem("selectedProduct"));
+
+      if (productData) {
+        // ✅ Cart ko overwrite karo, sirf current product rakho
+        const cart = [{
+          id: productData.id,
+          title: productData.title,
+          price: Number(productData.price) || 0,
+          images: productData.images && productData.images.length ? productData.images : [""],
+          quantity: 1,
+          sku: productData.sku || productData.SKU || ("SKU-" + productData.id)
+        }];
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // ✅ Sidha checkout page open karo
+        window.location.href = "checkout.html";
+      } else {
+        alert("Product not found!");
+      }
+    });
+  }
+});
+</script>
+
+
+
+ 
+  <!-- Your global scripts -->
+  <script src="products.js"></script>
+  <script src="main.js"></script>
+
+
+
+
+</body>
+</html>

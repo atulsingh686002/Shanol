@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<!-- ✅ Canonical + Meta for Home -->
+<title>Shanol — Premium Artificial Flowers & Home Decor</title>
+<link rel="canonical" href="https://shanol.shop/">
+<meta name="description" content="Shanol — Premium home decor at great prices. Shop wind chimes, candles, planters and more. Fast WhatsApp ordering.">
+<meta name="keywords" content="Artificial Flowers, Bouquets, Home Decor, Shanol Shop">
+
+<!-- ✅ Open Graph -->
+<meta property="og:site_name" content="Shanol">
+<meta property="og:title" content="Shanol — Premium Products">
+<meta property="og:description" content="Discover premium artificial flowers, bouquets & home decor.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shanol.shop/">
+<meta property="og:image" content="https://shanol.shop/assets/og-image.jpg">
+
+<!-- ✅ Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shanol — Premium Artificial Flowers & Decor">
+<meta name="twitter:description" content="Premium home decor, artificial flowers & more.">
+<meta name="twitter:image" content="https://shanol.shop/assets/og-image.jpg">
+
+<!-- ✅ JSON-LD Schema (Website + Search) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Shanol",
+  "url": "https://shanol.shop/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://shanol.shop/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- ✅ JSON-LD Schema (Organization) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Shanol",
+  "url": "https://shanol.shop/",
+  "logo": "https://shanol.shop/assets/logo.png",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+91-93541205714",
+    "contactType": "customer support",
+    "areaServed": "IN",
+    "availableLanguage": "en"
+  }]
+}
+</script>
+
+<!-- ✅ External Libs -->
+<link href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<script async defer src="https://accounts.google.com/gsi/client"></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+<link href="main.css" rel="stylesheet"/>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- 🔻 अब नीचे का सारा तेरा design ज्यों का त्यों रहेगा (header, hero video, slider, contact, cart वगैरह) -->
+<!-- वही कोड use कर जो तूने मुझे दिया था, बस ऊपर <head> replace कर लेना इस SEO वाले से -->
+
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full z-50 
+  bg-white/10 backdrop-blur-1xl border-b border-white/20 shadow-lg"style="backdrop-filter: blur(5px);">
+
+
+
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    
+    <!-- Brand -->
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="text-2xl font-extrabold tracking-tight text-indigo-600">Shanol</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-800">
+      <a href="index.html#home" class="hover:text-indigo-600">Home</a>
+      <a href="index.html#products" class="hover:text-indigo-600">Products</a>
+      <a href="index.html#offers" class="hover:text-indigo-600">Offers</a>
+      <a href="index.html#contact" class="hover:text-indigo-600">Contact</a>
+      <a href="index.html#cart" class="relative hover:text-indigo-600">
+        🛒
+        <span id="cart-count"
+              class="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 rounded-full grid place-items-center">0</span>
+      </a>
+    </nav>
+
+    <!-- Search -->
+    <div class="hidden md:block">
+      <input id="search" type="text" placeholder="Search products..."
+             class="w-64 rounded-full border border-white/20 bg-white/20 text-gray-900 px-4 py-1 text-sm 
+             placeholder-gray-500 focus:ring-2 focus:ring-indigo-300 outline-none">
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden p-2 rounded hover:bg-white/20" aria-label="menu">
+      <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+
+
+
+
+
+
+
+
+<!-- Home Section with Fullscreen Video + Gradient Overlay + Floating Particles + Welcome Overlay -->
+<section class="relative w-full h-screen overflow-hidden" id="home">
+<!-- Video Background -->
+<video autoplay="" class="absolute top-0 left-0 w-full h-full object-cover" loop="" muted="" playsinline="">
+<source src="Wind chime-bg.mp4" type=""/>
+    Your browser does not support the video tag.
+  </video>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/60"></div>
+<!-- Floating Particles -->
+<canvas class="absolute inset-0" id="particle-canvas"></canvas>
+<!-- Overlay Content -->
+<div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 animate-fade-in z-10">
+<h1 class="text-4xl md:text-6xl font-bold drop-shadow-lg mb-4">Welcome to <span class="text-indigo-500">Shanol</span></h1>
+<p class="text-lg md:text-2xl mb-6 drop-shadow-md">Discover premium products with ease</p>
+<div class="flex gap-4">
+<a class="bg-indigo-600 px-6 py-3 rounded text-white font-semibold hover:bg-indigo-700 transition transform hover:scale-110 shadow-lg" href="#products">Shop Now</a>
+<a class="border border-white text-white px-6 py-3 rounded font-semibold hover:bg-white hover:text-indigo-600 transition transform hover:scale-105" href="#contact">Contact Us</a>
+</div>
+</div>
+</section>
+
+<!-- ✅ Features Section -->
+<section class="container mx-auto px-4 py-12 grid md:grid-cols-3 gap-6 text-center">
+  <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up">
+    <h3 class="text-lg font-semibold mb-2">Curated Quality</h3>
+    <p class="text-gray-600 text-sm">Only the best products make it to our shelves after strict checks.</p>
+  </div>
+  <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="100">
+    <h3 class="text-lg font-semibold mb-2">Fast Delivery</h3>
+    <p class="text-gray-600 text-sm">Pan-India shipping with tracked orders and quick dispatches.</p>
+  </div>
+  <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
+    <h3 class="text-lg font-semibold mb-2">Easy Support</h3>
+    <p class="text-gray-600 text-sm">Reach us on WhatsApp anytime—real humans, real help.</p>
+  </div>
+</section>
+
+
+
+
+<!-- Product Slider Section -->
+<div class="container mx-auto px-4 py-10">
+<h2 class="text-3xl font-bold mb-6 text-gray-800 text-center"> New Arrivals </h2>
+<div class="swiper myProductSlider">
+<div class="swiper-wrapper" id="product-slider">
+<!-- Products JS loop se render honge -->
+</div>
+<!-- Navigation Arrows -->
+<div class="swiper-button-next text-indigo-600"></div>
+<div class="swiper-button-prev text-indigo-600"></div>
+<!-- Pagination Dots -->
+
+</div>
+</div>
+<div class="container mx-auto px-4 py-8" id="products">
+<h2 class="text-2xl font-bold mb-4">Products</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-list"></div>
+</div>
+<div class="container mx-auto px-4 py-8" id="contact">
+<!-- Contact Section -->
+<section class="relative py-6 w-full overflow-hidden opacity-100 translate-y-0 transition-all duration-1000 ease-out" id="contact">
+<!-- Animated Gradient Background (Full Width) -->
+<div class="absolute top-0 left-0 w-screen h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-gradient-x opacity-20"></div>
+<div class="container mx-auto px-4 relative z-10 max-w-6xl">
+<h2 class="text-2xl md:text-2xl font-bold text-center text-white mb-6 drop-shadow-lg">Contact Us</h2>
+<div class="grid md:grid-cols-2 gap-4 items-start">
+<!-- Contact Info -->
+<div class="space-y-3">
+<!-- Phone -->
+<div class="flex items-center gap-3 p-3 bg-white/90 rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105 transform group">
+<div class="bg-indigo-600 text-white p-3 rounded-full flex-shrink-0 group-hover:shadow transition-all duration-300">
+<svg class="h-5 w-5 group-hover:animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 5h12M9 3v2m6 16h6M15 21v-2m-4-8h6m-6 4h6" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-semibold text-sm text-gray-900">Phone</h3>
+<a class="text-gray-700 hover:text-indigo-600 transition text-sm" href="tel:+9193541205714">+91 93541 205714</a>
+</div>
+</div>
+<!-- Email -->
+<div class="flex items-center gap-3 p-3 bg-white/90 rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105 transform group">
+<div class="bg-indigo-600 text-white p-3 rounded-full flex-shrink-0 group-hover:shadow transition-all duration-300">
+<svg class="h-5 w-5 group-hover:animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 12H8m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-semibold text-sm text-gray-900">Email</h3>
+<a class="text-gray-700 hover:text-indigo-600 transition text-sm" href="mailto:shanol1807@gmail.com">shanol1807@gmail.com</a>
+</div>
+</div>
+<!-- Address -->
+<div class="flex items-center gap-3 p-3 bg-white/90 rounded-lg shadow hover:shadow-lg transition-all duration-300 hover:scale-105 transform group">
+<div class="bg-indigo-600 text-white p-3 rounded-full flex-shrink-0 group-hover:shadow transition-all duration-300">
+<svg class="h-5 w-5 group-hover:animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 10h18M3 14h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-semibold text-sm text-gray-900">Address</h3>
+<p class="text-gray-700 text-sm">G/F H No.2/1, Kh No. 537, Mandoli, Delhi - 110093</p>
+<a class="text-indigo-600 hover:underline text-sm" href="https://www.google.com/maps?q=28.705917,77.308639" target="_blank">View on Map</a>
+</div>
+</div>
+</div>
+<!-- Contact Form -->
+<form class="bg-white/90 p-4 rounded-lg shadow space-y-3 hover:shadow-lg transition-all duration-300 hover:scale-105 transform" id="contact-form">
+<input class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-200 transition duration-300 text-sm" id="contact-name" placeholder="Full Name" required="" type="text"/>
+<input class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-200 transition duration-300 text-sm" id="contact-email" placeholder="Email" required="" type="email"/>
+<textarea class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-200 transition duration-300 text-sm" id="contact-message" placeholder="Your Message" required=""></textarea>
+<button class="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition transform hover:scale-105 text-sm" type="submit">Send Message</button>
+<p class="text-green-600 font-semibold mt-1 hidden text-sm" id="success-msg">Message sent successfully!</p>
+</form>
+</div>
+<!-- Google Map -->
+<div class="mt-6 h-40 rounded-lg overflow-hidden shadow hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+<iframe allowfullscreen="" class="w-full h-full border-0" loading="lazy" src="https://www.google.com/maps?q=28.705917,77.308639&amp;output=embed"></iframe>
+</div>
+</div>
+</section>
+<style>
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 25s ease infinite;
+}
+</style>
+<script>
+// Scroll Reveal
+const contactSection = document.getElementById("contact");
+window.addEventListener("scroll", ()=>{
+  const rect = contactSection.getBoundingClientRect();
+  if(rect.top < window.innerHeight - 100){
+    contactSection.classList.remove("opacity-0","translate-y-12");
+    contactSection.classList.add("opacity-100","translate-y-0");
+  }
+});
+
+// Contact Form Submission
+document.getElementById("contact-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = document.getElementById("contact-name").value.trim();
+    const email = document.getElementById("contact-email").value.trim();
+    const message = document.getElementById("contact-message").value.trim();
+    if(!name || !email || !message){ alert("Please fill all fields!"); return; }
+
+    document.getElementById("success-msg").classList.remove("hidden");
+    this.reset();
+    setTimeout(()=> document.getElementById("success-msg").classList.add("hidden"), 4000);
+});
+</script>
+</div>
+<!-- Cart Section at Bottom -->
+<div class="container mx-auto px-4 py-8" id="cart">
+<h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+<p>Cart is empty.</p>
+</div>
+
+<script>
+  // Mobile drawer toggle
+  document.addEventListener("click", (e) => {
+    const menu = document.getElementById("mobile-menu");
+    if (e.target.closest("#menu-btn")) {
+      menu.classList.toggle("hidden");
+    } else if (!e.target.closest("#mobile-menu")) {
+      menu.classList.add("hidden");
+    }
+  });
+</script>
+
+<script>
+  var swiper = new Swiper(".myProductSlider", {
+    slidesPerView: 4,   // desktop pe ek sath 4 products
+    spaceBetween: 20,   // gap between cards
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      320: { slidesPerView: 1, spaceBetween: 10 },  // mobile
+      640: { slidesPerView: 2, spaceBetween: 15 },  // tablet
+      1024: { slidesPerView: 4, spaceBetween: 20 }  // desktop
+    }
+  });
+</script>
+
+<script src="products.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
